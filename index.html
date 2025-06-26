@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>College Student Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: #047857;
+      outline: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    header {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+
+    header .nav-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.375rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      border-color: #d1fae5;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, #ddefe7 0%, #f9fafb 100%);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #059669;
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #374151;
+      max-width: 600px;
+      margin: 0 auto;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background-color: #059669;
+      color: white;
+      padding: 0.75rem 2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 6px 12px rgb(5 150 105 / 0.35);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary .material-icons {
+      font-size: 20px;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: #047857;
+      box-shadow: 0 8px 16px rgb(4 120 87 / 0.5);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    /* Sections common */
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    section h2 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #065f46;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* About */
+    .about {
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.1rem;
+      color: #4b5563;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* Skills */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .skill {
+      background-color: #d1fae5;
+      color: #065f46;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgb(5 150 105 / 0.2);
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .skill:hover,
+    .skill:focus {
+      background-color: #10b981;
+      color: white;
+      outline: none;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgb(5 150 105 / 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .project-card:hover,
+    .project-card:focus {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgb(5 150 105 / 0.3);
+      outline: none;
+    }
+
+    .project-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-content {
+      padding: 1rem 1.5rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #059669;
+    }
+
+    .project-description {
+      flex-grow: 1;
+      font-size: 0.95rem;
+      color: #374151;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .project-link {
+      font-weight: 600;
+      padding-top: 0.5rem;
+      color: #10b981;
+      text-align: right;
+      font-size: 0.9rem;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .project-link:hover,
+    .project-link:focus {
+      border-color: #10b981;
+      outline: none;
+    }
+
+    /* Contact */
+    .contact-info {
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1rem;
+      color: #4b5563;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      user-select: none;
+    }
+
+    .contact-info a {
+      color: #059669;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .contact-info a:hover,
+    .contact-info a:focus {
+      color: #047857;
+      outline: none;
+    }
+
+    .material-icons.contact-icon {
+      color: #059669;
+      font-size: 20px;
+      user-select: none;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Specifically fix LinkedIn icon to align nicely */
+    .linkedin-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      fill: #059669;
+      flex-shrink: 0;
+    }
+
+    footer {
+      background-color: #059669;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.875rem;
+      user-select: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container" role="banner">
+      <div class="logo" tabIndex="0">Altamash's Portfolio</div>
+      <nav role="navigation" aria-label="Primary navigation">
+        <a href="#about" tabIndex="0">About</a>
+        <a href="#skills" tabIndex="0">Skills</a>
+        <a href="#projects" tabIndex="0">Projects</a>
+        <a href="#contact" tabIndex="0">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Introduction">
+      <h1 tabIndex="0">Hello, I'm a Positive College Student</h1>
+      <p tabIndex="0">Passionate about learning and creating impactful projects with a positive outlook. Welcome to my portfolio where I showcase my work and skills.</p>
+      <a href="#projects" class="btn-primary" tabIndex="0" aria-label="View Projects">
+        View Projects
+        <span class="material-icons" aria-hidden="true">arrow_forward</span>
+      </a>
+    </section>
+
+    <section id="about" aria-label="About Me">
+      <h2 tabIndex="0">About Me</h2>
+      <p class="about" tabIndex="0">
+        I am a motivated college student with a passion for technology, creative problem-solving, and continuous personal growth. With a positive personality and strong work ethic, I enjoy collaborating with others and taking on new challenges.
+      </p>
+    </section>
+
+    <section id="skills" aria-label="Skills">
+      <h2 tabIndex="0">Skills</h2>
+      <div class="skills-list" role="list">
+        <span class="skill" tabIndex="0" role="listitem" aria-label="HTML5">HTML5</span>
+        <span class="skill" tabIndex="0" role="listitem" aria-label="CSS3">CSS3</span>
+        <span class="skill" tabIndex="0" role="listitem" aria-label="JavaScript">JavaScript</span>
+        <span class="skill" tabIndex="0" role="listitem" aria-label="Git">Git</span>
+      </div>
+    </section>
+
+    <section id="projects" aria-label="Projects">
+      <h2 tabIndex="0">Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card" tabIndex="0" role="article" aria-label="E-learning Frontend">
+          <img src="elearning.jpg" alt="Screenshot of a modern E-learning frontend featuring a clean, b;blue-themed design" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">E-learning Frontend</h3>
+            <p class="project-description">A clean, responsive multi-page web interface for an online learning platform. It includes features like a homepage introduction, dynamic course listings, embedded video lessons, and visual progress tracking — all styled with HTML and CSS for a professional and user-friendly experience.</p>
+            <a class="project-link" href="#" tabIndex="0" aria-label="View Portfolio Website project details or demo">
+              View Details
+              <span class="material-icons" aria-hidden="true">open_in_new</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card" tabIndex="0" role="article" aria-label="Interactive Quiz Application">
+          <img src="quiz.jpg" alt="Screenshot of a Interactive Quiz Application have bluish background and white container for question in middle" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Interactive Quiz Application</h3>
+            <p class="project-description">A user-friendly web-based quiz app that allows learners to answer multiple-choice questions, receive instant feedback, and track their scores. Built with HTML, CSS, and JavaScript, it offers an engaging and interactive way to test knowledge in real-time.</p>
+            <a class="project-link" href="#" tabIndex="0" aria-label="View Study Planner App project details or demo">
+              View Details
+              <span class="material-icons" aria-hidden="true">open_in_new</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card" tabIndex="0" role="article" aria-label="real-time chat application">
+          <img src="chatapp.jpg" alt="Screenshot of a real-time chat application have lite themed bacground and chat-box" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Real time chat Application</h3>
+            <p class="project-description">A Real-Time Chat Application allows users to send and receive messages instantly without refreshing the page. It uses technologies like WebSockets to maintain a live connection between users. Built with front-end frameworks like React.js or Vue.js, and optionally backed by Node.js, it enables real-time communication across multiple devices such as PCs and mobile phones.</p>
+            <a class="project-link" href="#" tabIndex="0" aria-label="View Volunteer Event Website project details or demo">
+              View Details
+              <span class="material-icons" aria-hidden="true">open_in_new</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Contact">
+      <h2 tabIndex="0">Contact Me</h2>
+      <div class="contact-info">
+        <a href="mailto:student@example.com" tabIndex="0" aria-label="Send email to student@example.com">
+          <span class="material-icons contact-icon" aria-hidden="true">email</span>
+          khanaltamasharshad070@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" tabIndex="0" aria-label="View LinkedIn profile">
+          <!-- Replaced material-icons 'linkedin' with business_center icon for visual alignment -->
+          <span class="material-icons contact-icon" aria-hidden="true">business_center</span>
+          linkedin.com/in/www.linkedin.com/in/altamash-khan-b9b363359
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" tabIndex="0" aria-label="View GitHub profile">
+          <span class="material-icons contact-icon" aria-hidden="true">code</span>
+          github.com/yourusername
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p tabIndex="0">&copy; 2024 Positive College Student Portfolio</p>
+  </footer>
+</body>
+</html>
